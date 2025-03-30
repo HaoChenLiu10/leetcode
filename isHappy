@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int bitSquareSum(int n) {  // Fix return type to int
+        int sum = 0;
+        while (n > 0) {
+            int bit = n % 10;
+            sum += bit * bit;
+            n = n / 10;
+        }
+        return sum;
+    }
+
+    bool isHappy(int n) {
+        int slow = n, fast = n;
+        do {
+            slow = bitSquareSum(slow);            // Move slow one step
+            fast = bitSquareSum(bitSquareSum(fast)); // Move fast two steps
+        } while (slow != fast);
+
+        return slow == 1;
+    }
+};
